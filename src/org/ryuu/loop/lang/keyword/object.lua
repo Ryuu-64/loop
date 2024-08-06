@@ -22,12 +22,12 @@ end
 
 ---
 --- constructor
----
 ---@return object
 function object:new()
-    ---@type object
-    local this = setmetatable({}, self)
-    return this
+    return setmetatable({}, self)
+end
+
+function object:base()
 end
 
 ClassMetadataTable.Add(object, object._name)

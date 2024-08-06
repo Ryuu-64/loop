@@ -1,7 +1,8 @@
 ﻿---
----@param proxyTable table
----@return table
-return function(proxyTable)
+---@generic T
+---@param proxyTable T
+---@return T
+local function readonly(proxyTable)
     local metatable = {
         __index = proxyTable,
         __newindex = function(table, key, newValue)
@@ -17,20 +18,7 @@ return function(proxyTable)
 
     local readonlyTable = {}
     setmetatable(readonlyTable, metatable)
-
-    --region try add modifier
-    local proxyMetaTable = getmetatable(proxyTable)
-    if
-        proxyMetaTable ~= nil and
-        proxyMetaTable._type ~= nil and
-        proxyMetaTable._name ~= nil and
-        type(proxyMetaTable._modifiers) == "table" and
-        proxyMetaTable._interfaces ~= nil and
-        proxyMetaTable.__tostring ~= nil
-    then
-        table.insert(proxyMetaTable._modifiers, "readonly")
-        metatable._readonly = "_readonly"
-    end
-    --endregion
-    return readonlyTable  
+    return readonlyTable
 end
+
+return readonly

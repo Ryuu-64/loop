@@ -26,6 +26,7 @@ end
 
 ---
 ---@param name string
+---@return boolean
 function ClassMetadataTable.Has(name)
     return ClassMetadataTable.nameClassTable[name] ~= nil
 end

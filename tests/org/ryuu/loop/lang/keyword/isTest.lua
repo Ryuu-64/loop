@@ -1,4 +1,4 @@
-﻿require "org.ryuu.loop.InitializePackagePathForTests"
+﻿require "InitializePackagePathForTests"
 
 local is = require "org.ryuu.loop.lang.keyword.is"
 local class = require "org.ryuu.loop.lang.keyword.class"

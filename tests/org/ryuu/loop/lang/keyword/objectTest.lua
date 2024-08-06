@@ -1,4 +1,4 @@
-﻿require "org.ryuu.loop.InitializePackagePathForTests"
+﻿require "InitializePackagePathForTests"
 
 local Assertions = require "org.ryuu.lunit.Assertions"
 local object = require "org.ryuu.loop.lang.keyword.object"
