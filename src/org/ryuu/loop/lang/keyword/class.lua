@@ -3,24 +3,23 @@ local object = require "org.ryuu.loop.lang.keyword.object"
 local ClassMetadataTable = require "org.ryuu.loop.lang.runtime.ClassMetadataTable"
 local ClassValidator = require "org.ryuu.loop.lang.class.ClassValidator"
 
----
----@generic T:object
----@param className string
----@param baseClass object
+---@generic T:type
+---@param name string
+---@param baseClass type
 ---@return T
-local function class(className, baseClass)
-    if ClassMetadataTable.Has(className) then
-        error("name already exist, className=" .. className)
+local function class(name, baseClass)
+    if ClassMetadataTable.Has(name) then
+        error("name already exist, className=" .. name)
     end
 
     --region create class
     ---@type type
     local newClass = {}
     newClass.__index = newClass
-    newClass._name = className
+    newClass._name = name
     newClass._type = keyword.class
     newClass._interfaces = {}
-    ClassMetadataTable.Add(newClass, className)
+    ClassMetadataTable.Add(newClass, name)
     --endregion
 
     --region extend

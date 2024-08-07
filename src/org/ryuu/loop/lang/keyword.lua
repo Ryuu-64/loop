@@ -1,6 +1,5 @@
 ﻿local readonly = require "org.ryuu.loop.lang.keyword.readonly"
 
----
 ---@class keyword readonly
 ---@field interface string type keyword
 ---@field class string type keyword

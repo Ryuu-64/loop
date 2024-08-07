@@ -1,5 +1,4 @@
-﻿---
----@generic T
+﻿---@generic T
 ---@param proxyTable T
 ---@return T
 local function readonly(proxyTable)

@@ -3,7 +3,6 @@ local ClassImplements = require "org.ryuu.loop.lang.class.ClassImplements"
 local InterfaceImplements = require "org.ryuu.loop.lang.interface.InterfaceImplements"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 
----
 ---@param type type
 ---@param interfaces table<type>
 ---@return void

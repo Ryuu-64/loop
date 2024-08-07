@@ -1,5 +1,5 @@
 ﻿local keyword = require "org.ryuu.loop.lang.keyword"
-local MetadataTable = require "org.ryuu.loop.lang.runtime.ClassMetadataTable"
+local ClassMetadataTable = require "org.ryuu.loop.lang.runtime.ClassMetadataTable"
 local Exception = require "org.ryuu.loop.exception.Exception"
 
 ---@class NilException:Exception
@@ -9,7 +9,7 @@ NilException._name = "NilException"
 NilException._type = keyword.class
 NilException._interfaces = {}
 
-MetadataTable.Add(NilException, NilException._name)
-MetadataTable.AddBase(NilException, Exception)
+ClassMetadataTable.Add(NilException, NilException._name)
+ClassMetadataTable.AddBase(NilException, Exception)
 
 return NilException

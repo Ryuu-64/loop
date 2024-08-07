@@ -107,6 +107,10 @@ local function GetAllInterfaces(interfaces)
         table.insert(cur, interfaces[i])
     end
 
+    if #cur == 0 then
+        return all
+    end
+
     repeat
         local interface = cur[1]
         for i = 1, #interface._interfaces do

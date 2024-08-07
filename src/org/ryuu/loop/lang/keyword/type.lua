@@ -1,5 +1,4 @@
-﻿---
----@generic T:object
+﻿---@generic T:object
 ---@class type
 ---@field _name string
 ---@field _type string type keyword

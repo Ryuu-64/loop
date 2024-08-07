@@ -1,4 +1,5 @@
-﻿local InterfaceValidator = require "org.ryuu.loop.lang.interface.InterfaceValidator"
+﻿local InterfaceMetadataTable = require "org.ryuu.loop.lang.runtime.InterfaceMetadataTable"
+local InterfaceValidator = require "org.ryuu.loop.lang.interface.InterfaceValidator"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 local ArgumentNilException = require "org.ryuu.loop.exception.ArgumentNilException"
 
@@ -41,12 +42,17 @@ local function GetException(interfaces)
     return ArgumentException:new("invalid implements parameters, reason: " .. reason)
 end
 
-function InterfaceImplements.implements(interface, interfaces)
-    if not IsValid(interfaces) then
-        error(tostring(GetException(interfaces)))
+--TODO validate implements
+
+---@param self type
+---@param bases table<type>
+function InterfaceImplements.implements(self, bases)
+    if not IsValid(bases) then
+        error(tostring(GetException(bases)))
     end
 
-    interface._interfaces = interfaces
+    self._interfaces = bases
+    InterfaceMetadataTable.AddBases(self, bases)
 end
 
 return InterfaceImplements

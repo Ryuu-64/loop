@@ -1,7 +1,6 @@
 ﻿local keyword = require "org.ryuu.loop.lang.keyword"
 local object = require "org.ryuu.loop.lang.keyword.object"
 
----
 ---@class Exception:object
 ---@field message string
 ---@field innerException Exception

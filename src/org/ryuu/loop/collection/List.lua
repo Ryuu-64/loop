@@ -2,7 +2,6 @@
 local is = require "org.ryuu.loop.lang.keyword.is"
 local object = require "org.ryuu.loop.lang.keyword.object"
 
----
 ---@class List:object Represents a list of objects that can be accessed by index. Provides methods to search, sort, and manipulate lists.
 ---@field items table
 local List = class("List")
@@ -17,7 +16,6 @@ function List:__tostring()
     return "[" .. itemsToString .. "]"
 end
 
----
 ---@param a List
 ---@param b List
 function List.__eq(a, b)
@@ -54,13 +52,11 @@ function List:new(items)
     return this
 end
 
----
 ---Adds an object to the end of the List
 function List:Add(item)
     table.insert(self.items, item)
 end
 
----
 ---Add all objects to the end of the List
 ---@param list List
 function List:AddAll(list)
@@ -69,19 +65,16 @@ function List:AddAll(list)
     end
 end
 
----
 ---Removes all elements from the List
 function List:Clear()
     self.items = {}
 end
 
----
 ---Gets the element at the specified index.
 function List:Get(index)
     return self.items[index]
 end
 
----
 ---Determines whether an element is in the List
 function List:Contains(item)
     for _, currItem in ipairs(self.items) do
@@ -92,7 +85,6 @@ function List:Contains(item)
     return false
 end
 
----
 ---The zero-based index of the first occurrence of an element that matches the conditions defined by match, if found; otherwise, -1.
 ---@return boolean Returns the zero-based index of the first occurrence of a value in the List
 function List:FirstIndexOf(item)
@@ -104,7 +96,6 @@ function List:FirstIndexOf(item)
     return -1
 end
 
----
 ---The zero-based index of the last occurrence of an element that matches the conditions defined by match, if found; otherwise, -1.
 ---@return boolean Returns the zero-based index of the last occurrence of a value in the List
 function List:LastIndexOf(item)
@@ -116,7 +107,6 @@ function List:LastIndexOf(item)
     return -1
 end
 
----
 ---Sorts the elements in the List using the specified provided comparator function to compare list elements.
 ---@param comparator fun(a:any,b:any) The comparator to use when comparing elements.
 function List:Sort(comparator)
@@ -127,7 +117,6 @@ function List:Sort(comparator)
     end
 end
 
----
 ---Removes the first occurrence of a specific object from the List
 ---@param item any The item to remove from the List
 ---@return boolean true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the List
@@ -141,7 +130,6 @@ function List:RemoveFirst(item)
     return false
 end
 
----
 ---Removes the last occurrence of a specific object from the List
 ---@param item any The item to remove from the List
 ---@return boolean true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the List
@@ -155,13 +143,11 @@ function List:RemoveLast(item)
     return false
 end
 
----
 ---Removes the element at the specified index of the List
 function List:RemoveAt(index)
     table.remove(self.items, index)
 end
 
----
 ---Removes all the elements that match the conditions defined by the specified predicate.
 ---@param predicate fun(item:any):boolean function that defines the conditions of the elements to remove.
 function List:RemoveAll(predicate)
@@ -179,7 +165,6 @@ function List:RemoveAll(predicate)
     return removeCount
 end
 
----
 ---Reverses the order of the items in the List
 function List:Reverse()
     local left = 1
@@ -192,7 +177,6 @@ function List:Reverse()
     end
 end
 
----
 ---Gets the number of elements contained in the List
 function List:Count()
     return #self.items

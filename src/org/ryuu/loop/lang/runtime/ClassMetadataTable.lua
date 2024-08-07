@@ -9,36 +9,31 @@ ClassMetadataTable.classNameTable = {}
 ClassMetadataTable.nameClassTable = {}
 ClassMetadataTable.classBaseClassTable = {}
 
----
----@param class type
----@param baseClass type
-function ClassMetadataTable.AddBase(class, baseClass)
-    ClassMetadataTable.classBaseClassTable[class] = baseClass
+---@param self type
+---@param base type
+function ClassMetadataTable.AddBase(self, base)
+    ClassMetadataTable.classBaseClassTable[self] = base
 end
 
----
----@param class type
+---@param self type
 ---@param name string
-function ClassMetadataTable.Add(class, name)
-    ClassMetadataTable.classNameTable[class] = name
-    ClassMetadataTable.nameClassTable[name] = class
+function ClassMetadataTable.Add(self, name)
+    ClassMetadataTable.classNameTable[self] = name
+    ClassMetadataTable.nameClassTable[name] = self
 end
 
----
 ---@param name string
 ---@return boolean
 function ClassMetadataTable.Has(name)
     return ClassMetadataTable.nameClassTable[name] ~= nil
 end
 
----
 ---@param name string
 ---@return type
 function ClassMetadataTable.Get(name)
     return ClassMetadataTable.nameClassTable[name]
 end
 
----
 ---@param name string
 ---@return type
 function ClassMetadataTable.GetBase(name)
