@@ -107,10 +107,6 @@ local function GetAllInterfaces(interfaces)
         table.insert(cur, interfaces[i])
     end
 
-    if #cur == 0 then
-        return all
-    end
-
     repeat
         local interface = cur[1]
         for i = 1, #interface._interfaces do
@@ -124,6 +120,14 @@ local function GetAllInterfaces(interfaces)
 end
 
 local function IsValid(class, interfaces)
+    if type(interfaces) ~= "table" then
+        return false
+    end
+
+    if #interfaces == 0 then
+        return false
+    end
+
     local allInterfaces = GetAllInterfaces(interfaces)
     for i = 1, #allInterfaces do
         local interface = allInterfaces[i]
@@ -136,17 +140,27 @@ local function IsValid(class, interfaces)
 end
 
 local function GetException(class, interfaces)
-    local allInterfaces = GetAllInterfaces(interfaces)
+    if type(interfaces) ~= "table" then
+        return ArgumentException:new("interfaces is not type of table")
+    end
+
+    if InterfaceValidator.is(interfaces) then
+        return ArgumentException:new("interfaces should be a table of interface, not a interface")
+    end
+
+    if #interfaces == 0 then
+        return ArgumentException:new("interfaces is empty")
+    end
 
     --region interfaces name
     local interfaceNameList = {}
     for i = 1, #interfaces do
         table.insert(interfaceNameList, "'" .. interfaces[i]._name .. "'")
     end
-
     local interfaceNameString = table.concat(interfaceNameList, ", ")
     --endregion
 
+    local allInterfaces = GetAllInterfaces(interfaces)
     local messages = ""
     for i = 1, #allInterfaces do
         local interface = allInterfaces[i]

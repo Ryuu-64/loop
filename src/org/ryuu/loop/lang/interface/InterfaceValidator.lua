@@ -34,6 +34,24 @@ function InterfaceValidator.is(interface)
     return true
 end
 
+function InterfaceValidator.are(interfaces)
+    if interfaces == nil then
+        return false
+    end
+
+    if type(interfaces) ~= "table" then
+        return false
+    end
+
+    for i = 1, #interfaces do
+        if not InterfaceValidator.is(interfaces[i]) then
+            return false
+        end
+    end
+
+    return true
+end
+
 function InterfaceValidator.GetException(interface)
     if interface == nil then
         return ArgumentException:new("interface is nil")

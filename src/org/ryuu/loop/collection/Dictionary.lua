@@ -51,10 +51,10 @@ function Dictionary:ContainsValue(value)
     return false
 end
 
---function Dictionary:Count()
---    return #self.pairs
---end
+function Dictionary:Count()
+    return #self.pairs
+end
 
-implements(Dictionary, Collection)
+implements(Dictionary, { Collection })
 
 return Dictionary

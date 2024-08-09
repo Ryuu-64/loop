@@ -3,17 +3,18 @@ local ClassImplements = require "org.ryuu.loop.lang.class.ClassImplements"
 local InterfaceImplements = require "org.ryuu.loop.lang.interface.InterfaceImplements"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 
----@param type type
+--TODO interfaces type and size validation
+---@param self type class or interface
 ---@param interfaces table<type>
 ---@return void
-local implements = function(type, interfaces)
-    if type._type == keyword.class then
-        ClassImplements.implements(type, interfaces)
+local implements = function(self, interfaces)
+    if self._type == keyword.class then
+        ClassImplements.implements(self, interfaces)
         return
     end
 
-    if type._type == keyword.interface then
-        InterfaceImplements.implements(type, interfaces)
+    if self._type == keyword.interface then
+        InterfaceImplements.implements(self, interfaces)
         return
     end
 
