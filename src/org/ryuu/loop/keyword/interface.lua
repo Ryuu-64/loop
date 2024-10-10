@@ -1,5 +1,5 @@
 ﻿local keyword = require "org.ryuu.loop.internal.keyword"
-local InterfaceMetadataTable = require "org.ryuu.loop.lang.runtime.InterfaceMetadataTable"
+local InterfaceMetadataTable = require "org.ryuu.loop.internal.interface.InterfaceMetadataTable"
 
 ---@param name string
 ---@return type

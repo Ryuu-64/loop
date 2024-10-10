@@ -1,6 +1,6 @@
 ﻿local keyword = require "org.ryuu.loop.internal.keyword"
-local ClassImplements = require "org.ryuu.loop.lang.class.ClassImplements"
-local InterfaceImplements = require "org.ryuu.loop.lang.internal.interface.InterfaceImplements"
+local ClassImplements = require "org.ryuu.loop.internal.class.ClassImplements"
+local InterfaceImplements = require "org.ryuu.loop.internal.interface.InterfaceImplements"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 
 --TODO interfaces type and size validation
