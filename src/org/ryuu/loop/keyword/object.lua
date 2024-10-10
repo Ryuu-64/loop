@@ -1,12 +1,14 @@
-﻿local keyword = require "org.ryuu.loop.lang.keyword"
-local ClassMetadataTable = require "org.ryuu.loop.lang.runtime.ClassMetadataTable"
+﻿local keyword = require "org.ryuu.loop.internal.keyword"
+local ClassMetadataTable = require "org.ryuu.loop.internal.class.ClassMetadataTable"
 
 ---@class object Supports all classes in the class hierarchy and provides low-level services to derived classes. It is the root of the type hierarchy.
-local object = setmetatable({}, nil)
+local object = {
+    _name = "object",
+    _type = keyword.class,
+    _interfaces = {}
+}
 object.__index = object
-object._name = "object"
-object._type = keyword.class
-object._interfaces = {}
+setmetatable(object, nil)
 
 function object:__tostring()
     return self._name

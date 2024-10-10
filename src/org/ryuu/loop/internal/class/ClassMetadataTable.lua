@@ -1,6 +1,7 @@
 ﻿---@class ClassMetadataTable
 local ClassMetadataTable = {}
 ClassMetadataTable.__index = ClassMetadataTable
+
 function ClassMetadataTable:__tostring()
     return "ClassMetadataTable"
 end

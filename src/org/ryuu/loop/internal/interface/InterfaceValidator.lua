@@ -1,4 +1,4 @@
-﻿local keyword = require "org.ryuu.loop.lang.keyword"
+﻿local keyword = require "org.ryuu.loop.internal.keyword"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 
 ---@class InterfaceValidator

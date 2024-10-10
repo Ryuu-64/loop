@@ -1,4 +1,4 @@
-﻿local keyword = require "org.ryuu.loop.lang.keyword"
+﻿local keyword = require "org.ryuu.loop.internal.keyword"
 local InterfaceMetadataTable = require "org.ryuu.loop.lang.runtime.InterfaceMetadataTable"
 
 ---@param name string

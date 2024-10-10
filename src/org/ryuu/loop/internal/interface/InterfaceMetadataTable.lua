@@ -1,6 +1,7 @@
 ﻿---@class InterfaceMetadataTable
 local InterfaceMetadataTable = {}
 InterfaceMetadataTable.__index = InterfaceMetadataTable
+
 function InterfaceMetadataTable:__tostring()
     return "InterfaceMetadataTable"
 end

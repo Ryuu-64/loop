@@ -1,7 +1,7 @@
 ﻿require "InitializePackagePathForTests"
 
-local is = require "org.ryuu.loop.lang.keyword.is"
-local class = require "org.ryuu.loop.lang.keyword.class"
+local is = require "org.ryuu.loop.keyword.is"
+local class = require "org.ryuu.loop.keyword.class"
 local Assertions = require "org.ryuu.lunit.Assertions"
 
 local function isTest()

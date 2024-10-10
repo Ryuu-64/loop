@@ -1,5 +1,5 @@
 ﻿local InterfaceValidator = require "org.ryuu.loop.lang.interface.InterfaceValidator"
-local ClassValidator = require "org.ryuu.loop.lang.class.ClassValidator"
+local ClassValidator = require "org.ryuu.loop.internal.class.ClassValidator"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 
 ---@class ClassImplements

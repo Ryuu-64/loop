@@ -1,8 +1,8 @@
 ﻿require "InitializePackagePathForTests"
 
-local class = require "org.ryuu.loop.lang.keyword.class"
-local object = require "org.ryuu.loop.lang.keyword.object"
-local readonly = require "org.ryuu.loop.lang.keyword.readonly"
+local class = require "org.ryuu.loop.keyword.class"
+local object = require "org.ryuu.loop.keyword.object"
+local readonly = require "org.ryuu.loop.keyword.readonly"
 local Assertions = require "org.ryuu.lunit.Assertions"
 
 ---

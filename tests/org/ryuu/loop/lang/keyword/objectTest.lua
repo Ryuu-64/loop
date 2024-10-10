@@ -1,8 +1,8 @@
 ﻿require "InitializePackagePathForTests"
 
 local Assertions = require "org.ryuu.lunit.Assertions"
-local object = require "org.ryuu.loop.lang.keyword.object"
-local class = require "org.ryuu.loop.lang.keyword.class"
+local object = require "org.ryuu.loop.keyword.object"
+local class = require "org.ryuu.loop.keyword.class"
 
 local function equalsTest()
     local a = object:new()

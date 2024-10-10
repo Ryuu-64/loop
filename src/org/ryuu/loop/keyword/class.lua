@@ -1,7 +1,7 @@
-﻿local keyword = require "org.ryuu.loop.lang.keyword"
-local object = require "org.ryuu.loop.lang.keyword.object"
-local ClassMetadataTable = require "org.ryuu.loop.lang.runtime.ClassMetadataTable"
-local ClassValidator = require "org.ryuu.loop.lang.class.ClassValidator"
+﻿local keyword = require "org.ryuu.loop.internal.keyword"
+local object = require "org.ryuu.loop.keyword.object"
+local ClassMetadataTable = require "org.ryuu.loop.internal.class.ClassMetadataTable"
+local ClassValidator = require "org.ryuu.loop.internal.class.ClassValidator"
 
 ---@generic T:type
 ---@param name string
@@ -14,13 +14,14 @@ local function class(name, baseClass)
 
     --region create class
     ---@type type
-    local newClass = {}
+    local newClass = {
+        _name = name,
+        _type = keyword.class,
+        _interfaces = {}
+    }
     newClass.__index = newClass
-    newClass._name = name
-    newClass._type = keyword.class
-    newClass._interfaces = {}
-    ClassMetadataTable.Add(newClass, name)
     --endregion
+    ClassMetadataTable.Add(newClass, name)
 
     --region extend
     -- object is default class
@@ -38,8 +39,8 @@ local function class(name, baseClass)
     -- inherit __tostring
     newClass.__tostring = baseClass.__tostring or newClass.__tostring
 
-    ClassMetadataTable.AddBase(newClass, baseClass)
     --endregion
+    ClassMetadataTable.AddBase(newClass, baseClass)
 
     return newClass
 end
