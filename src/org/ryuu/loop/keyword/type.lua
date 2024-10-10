@@ -1,22 +1,5 @@
-﻿---@class type:object
----@field _name string
----@field _type string type keyword
----@field _interfaces table
-local type = {
-    _name = "type",
-    _type = "class",
-    _interfaces = {}
-}
+﻿local class = require "org.ryuu.loop.keyword.class"
 
-function type:__tostring()
-    return self._name
-end
-
----@generic T:object
----@param a T
----@param b T
-function type.__eq(a, b)
-    return rawequal(a, b)
-end
-
+---@class type:object
+local type = class("type")
 return type

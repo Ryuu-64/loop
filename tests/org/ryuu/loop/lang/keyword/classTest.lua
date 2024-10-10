@@ -7,7 +7,7 @@ local Assertions = require "org.ryuu.lunit.Assertions"
 local ClassForClassTest = class("ClassForClassTest")
 
 function ClassForClassTest:new(foo, bar)
-    local instance = ClassForClassTest:base()
+    local instance = ClassForClassTest.base(self)
     instance.foo = foo
     instance.bar = bar
     return instance
@@ -23,7 +23,7 @@ Assertions.AssertEqual(42, obj.bar)
 local ClassForClassTest2 = class("ClassForClassTest2", ClassForClassTest)
 
 function ClassForClassTest2:new(foo, bar)
-    return ClassForClassTest2:base(foo, bar)
+    return ClassForClassTest2.base(self, foo, bar)
 end
 
 obj = ClassForClassTest2:new(37, 42)

@@ -1,4 +1,5 @@
 ﻿local keyword = require "org.ryuu.loop.internal.keyword"
+local createType = require "org.ryuu.loop.internal.createType"
 local object = require "org.ryuu.loop.keyword.object"
 local ClassMetadataTable = require "org.ryuu.loop.internal.class.ClassMetadataTable"
 local ClassValidator = require "org.ryuu.loop.internal.class.ClassValidator"
@@ -14,12 +15,7 @@ local function class(name, baseClass)
 
     --region create class
     ---@type type
-    local newClass = {
-        _name = name,
-        _type = keyword.class,
-        _interfaces = {}
-    }
-    newClass.__index = newClass
+    local newClass = createType(name, keyword.class)
     --endregion
     ClassMetadataTable.Add(newClass, name)
 
