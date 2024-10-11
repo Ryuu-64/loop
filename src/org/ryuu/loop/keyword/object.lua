@@ -20,15 +20,20 @@ function object.__eq(a, b)
     return rawequal(a, b)
 end
 
+---
 ---@generic T:object
----@return T
-function object:new()
-    return setmetatable({}, self)
+---@param self type The type of the object to be instantiated
+---@return T The instance of the type
+function object.new(self)
+    local this = {}
+    setmetatable(this, self)
+    return this
 end
 
 ---@generic T:object
----@return T
-function object:base()
+---@param self type The type of the object to be instantiated
+---@return T An instance of the base class for the base method
+function object.base(self)
 end
 
 ClassMetadataTable.Add(object, object._name)

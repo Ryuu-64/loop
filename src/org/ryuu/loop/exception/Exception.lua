@@ -6,8 +6,15 @@
 local Exception = class("Exception")
 
 function Exception:__tostring()
-    return self._name ..
-        "(message=" .. tostring(self.message) .. ", innerException=" .. tostring(self.innerException) .. ")"
+    local exceptionToString = self._name .. "("
+    if self.message ~= nil then
+        exceptionToString = exceptionToString .. "message=" .. tostring(self.message)
+    end
+    if self.innerException ~= nil then
+        exceptionToString = exceptionToString .. ", innerException=" .. tostring(self.innerException)
+    end
+    exceptionToString = exceptionToString .. ")"
+    return exceptionToString
 end
 
 ---@return Exception
