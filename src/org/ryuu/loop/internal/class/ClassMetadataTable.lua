@@ -1,14 +1,14 @@
 ﻿---@class ClassMetadataTable
-local ClassMetadataTable = {}
+local ClassMetadataTable = {
+    classNameTable = {},
+    nameClassTable = {},
+    classBaseClassTable = {}
+}
 ClassMetadataTable.__index = ClassMetadataTable
 
 function ClassMetadataTable:__tostring()
     return "ClassMetadataTable"
 end
-
-ClassMetadataTable.classNameTable = {}
-ClassMetadataTable.nameClassTable = {}
-ClassMetadataTable.classBaseClassTable = {}
 
 ---@param self type
 ---@param base type

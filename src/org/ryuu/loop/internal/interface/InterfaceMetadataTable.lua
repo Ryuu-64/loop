@@ -1,14 +1,14 @@
 ﻿---@class InterfaceMetadataTable
-local InterfaceMetadataTable = {}
+local InterfaceMetadataTable = {
+    interfaceNameTable = {},
+    nameInterfaceTable = {},
+    interfaceBaseInterfaceTable = {}
+}
 InterfaceMetadataTable.__index = InterfaceMetadataTable
 
 function InterfaceMetadataTable:__tostring()
     return "InterfaceMetadataTable"
 end
-
-InterfaceMetadataTable.interfaceNameTable = {}
-InterfaceMetadataTable.nameInterfaceTable = {}
-InterfaceMetadataTable.interfaceBaseInterfaceTable = {}
 
 ---@param self type
 ---@param bases table<type>
