@@ -49,7 +49,6 @@ function InterfaceValidator.GetException(interface)
     end
 
     --region _interfaces
-
     if interface._interfaces == nil then
         return ArgumentException:new("interface._interfaces is nil")
     end
@@ -64,15 +63,16 @@ function InterfaceValidator.GetException(interface)
         local exception = InterfaceValidator.GetException(currInterface)
         if exception ~= nil then
             reason = reason ..
-                "interface._interfaces[" ..
-                i .. "] (" .. currInterface._name .. ") is not a valid interface: " .. exception.message .. "\n"
+                "interface._interfaces[" .. i .. "]" ..
+                " (" .. currInterface._name .. ") is not a valid interface: " ..
+                tostring(exception) .. "\n"
         end
     end
+    --endregion
 
     if reason ~= nil then
         return ArgumentException:new(reason)
     end
-    --endregion
 
     return nil
 end
