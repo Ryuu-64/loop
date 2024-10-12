@@ -24,8 +24,8 @@ local function ClassInterfaceValidator(class, interface)
     if not ClassValidator.Is(class) then
         return false
     end
-
-    if not InterfaceValidator.is(interface) then
+    
+    if not InterfaceValidator.Is(interface) then
         return false
     end
 
@@ -77,7 +77,7 @@ local function InterfaceInvalidMessage(class, interface)
         return "not a class"
     end
 
-    if not InterfaceValidator.is(interface) then
+    if not InterfaceValidator.Is(interface) then
         return "not a interface"
     end
 
@@ -144,7 +144,7 @@ local function GetException(class, interfaces)
         return ArgumentException:new("interfaces is not type of table")
     end
 
-    if InterfaceValidator.is(interfaces) then
+    if InterfaceValidator.Are(interfaces) then
         return ArgumentException:new("interfaces should be a table of interface, not a interface")
     end
 
@@ -172,7 +172,7 @@ local function GetException(class, interfaces)
     )
 end
 
-function ClassImplements.implements(class, interfaces)
+function ClassImplements.Implements(class, interfaces)
     if not IsValid(class, interfaces) then
         error(tostring(ArgumentException:new("invalid implements parameters", GetException(class, interfaces))))
     end

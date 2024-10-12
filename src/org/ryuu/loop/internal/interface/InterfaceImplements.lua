@@ -17,20 +17,18 @@ local function GetException(interfaces)
 
     local reason = ""
     for i = 1, #interfaces do
-        if not InterfaceValidator.is(interfaces[i]) then
+        if not InterfaceValidator.Is(interfaces[i]) then
             reason = reason .. InterfaceValidator.GetException(interfaces[i]).message
         end
     end
     return ArgumentException:new("invalid implements parameters, reason: " .. reason)
 end
 
---TODO validate implements
-
 ---@param self type
 ---@param bases table<type>
-function InterfaceImplements.implements(self, bases)
-    if not InterfaceValidator.are(bases) then
-        error(tostring(GetException(bases)))       
+function InterfaceImplements.Implements(self, bases)
+    if not InterfaceValidator.Are(bases) then
+        error(tostring(GetException(bases)))
     end
 
     self._interfaces = bases

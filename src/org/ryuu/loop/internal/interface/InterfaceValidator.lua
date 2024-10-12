@@ -4,37 +4,11 @@ local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 ---@class InterfaceValidator
 local InterfaceValidator = {}
 
-function InterfaceValidator.is(interface)
-    if interface == nil then
-        return false
-    end
-
-    if interface._name == nil then
-        return false
-    end
-
-    if interface._type ~= keyword.interface then
-        return false
-    end
-
-    if interface._interfaces == nil then
-        return false
-    end
-
-    if type(interface._interfaces) ~= "table" then
-        return false
-    end
-
-    for i = 1, #interface._interfaces do
-        if not InterfaceValidator.is(interface._interfaces[i]) then
-            return false
-        end
-    end
-
-    return true
+function InterfaceValidator.Is(interface)
+    return InterfaceValidator.Are({ interface })
 end
 
-function InterfaceValidator.are(interfaces)
+function InterfaceValidator.Are(interfaces)
     if interfaces == nil then
         return false
     end
@@ -43,9 +17,18 @@ function InterfaceValidator.are(interfaces)
         return false
     end
 
-    for i = 1, #interfaces do
-        if not InterfaceValidator.is(interfaces[i]) then
+    while #interfaces > 0 do
+        local current = table.remove(interfaces)
+
+        if current == nil or
+            current._name == nil or
+            current._type ~= keyword.interface or
+            current._interfaces == nil then
             return false
+        end
+
+        for i = 1, #current._interfaces do
+            table.insert(interfaces, current._interfaces[i])
         end
     end
 

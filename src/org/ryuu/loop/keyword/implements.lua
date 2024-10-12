@@ -9,12 +9,12 @@ local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 ---@return void
 local implements = function(self, interfaces)
     if self._type == keyword.class then
-        ClassImplements.implements(self, interfaces)
+        ClassImplements.Implements(self, interfaces)
         return
     end
 
     if self._type == keyword.interface then
-        InterfaceImplements.implements(self, interfaces)
+        InterfaceImplements.Implements(self, interfaces)
         return
     end
 
