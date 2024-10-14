@@ -17,7 +17,10 @@ function Exception:__tostring()
     return exceptionToString
 end
 
----@return Exception
+---@generic T:Exception
+---@field message string
+---@field innerException T
+---@return T
 function Exception:new(message, innerException)
     ---@type Exception
     local this = Exception.base(self)

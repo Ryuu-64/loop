@@ -1,4 +1,5 @@
-﻿local InterfaceValidator = require "org.ryuu.loop.internal.interface.InterfaceValidator"
+﻿local throw = require "org.ryuu.loop.keyword.throw"
+local InterfaceValidator = require "org.ryuu.loop.internal.interface.InterfaceValidator"
 local ClassValidator = require "org.ryuu.loop.internal.class.ClassValidator"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 
@@ -176,8 +177,7 @@ function ClassImplements.Implements(class, interfaces)
     if not IsValid(class, interfaces) then
         local innerException = GetException(class, interfaces)
         local exception = ArgumentException:new("invalid implements parameters", innerException)
-        local exceptionToString = tostring(exception)
-        error(exceptionToString)
+        throw(exception)
     end
 
     class._interfaces = interfaces

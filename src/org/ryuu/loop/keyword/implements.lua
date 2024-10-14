@@ -1,4 +1,5 @@
 ﻿local keyword = require "org.ryuu.loop.internal.keyword"
+local throw = require "org.ryuu.loop.keyword.throw"
 local ClassImplements = require "org.ryuu.loop.internal.class.ClassImplements"
 local InterfaceImplements = require "org.ryuu.loop.internal.interface.InterfaceImplements"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
@@ -18,7 +19,7 @@ local implements = function(self, interfaces)
         return
     end
 
-    error(tostring(ArgumentException:new("type invalid")))
+    throw(ArgumentException:new("type invalid"))
 end
 
 return implements

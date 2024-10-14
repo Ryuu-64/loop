@@ -1,4 +1,5 @@
-﻿local InterfaceMetadataTable = require "org.ryuu.loop.internal.interface.InterfaceMetadataTable"
+﻿local throw = require "org.ryuu.loop.keyword.throw"
+local InterfaceMetadataTable = require "org.ryuu.loop.internal.interface.InterfaceMetadataTable"
 local InterfaceValidator = require "org.ryuu.loop.internal.interface.InterfaceValidator"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 local ArgumentNilException = require "org.ryuu.loop.exception.ArgumentNilException"
@@ -28,7 +29,8 @@ end
 ---@param bases table<type>
 function InterfaceImplements.Implements(self, bases)
     if not InterfaceValidator.Are(bases) then
-        error(tostring(GetException(bases)))
+        local exception = GetException(bases)
+        throw(exception)
     end
 
     self._interfaces = bases
