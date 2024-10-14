@@ -24,7 +24,7 @@ local function ClassInterfaceValidator(class, interface)
     if not ClassValidator.Is(class) then
         return false
     end
-    
+
     if not InterfaceValidator.Is(interface) then
         return false
     end
@@ -174,7 +174,10 @@ end
 
 function ClassImplements.Implements(class, interfaces)
     if not IsValid(class, interfaces) then
-        error(tostring(ArgumentException:new("invalid implements parameters", GetException(class, interfaces))))
+        local innerException = GetException(class, interfaces)
+        local exception = ArgumentException:new("invalid implements parameters", innerException)
+        local exceptionToString = tostring(exception)
+        error(exceptionToString)
     end
 
     class._interfaces = interfaces
