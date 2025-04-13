@@ -1,5 +1,4 @@
 ﻿local throw = require "org.ryuu.loop.keyword.throw"
-local InterfaceMetadataTable = require "org.ryuu.loop.internal.interface.InterfaceMetadataTable"
 local InterfaceValidator = require "org.ryuu.loop.internal.interface.InterfaceValidator"
 local ArgumentException = require "org.ryuu.loop.exception.ArgumentException"
 local ArgumentNilException = require "org.ryuu.loop.exception.ArgumentNilException"
@@ -34,7 +33,6 @@ function InterfaceImplements.Implements(self, bases)
     end
 
     self._interfaces = bases
-    InterfaceMetadataTable.AddBases(self, bases)
 end
 
 return InterfaceImplements

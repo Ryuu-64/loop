@@ -1,44 +1,40 @@
 ﻿local keyword = require "org.ryuu.loop.internal.keyword"
-local createType = require "org.ryuu.loop.internal.createType"
-local object = require "org.ryuu.loop.keyword.object"
-local ClassMetadataTable = require "org.ryuu.loop.internal.class.ClassMetadataTable"
+local create_type = require "org.ryuu.loop.internal.create_type"
+local type_meta_data = require "org.ryuu.loop.internal.type_meta_data"
 local ClassValidator = require "org.ryuu.loop.internal.class.ClassValidator"
+local object = require "org.ryuu.loop.keyword.object"
 
 ---@generic T:type
 ---@param name string
----@param baseClass type
+---@param base_class type
 ---@return T
-local function class(name, baseClass)
-    if ClassMetadataTable.Has(name) then
-        error("name already exist, className=" .. name)
+local function class(name, base_class)
+    if type_meta_data.Has(name) then
+        error("Type already exist, name=" .. name .. ".")
     end
 
     --region create class
     ---@type type
-    local newClass = createType(name, keyword.class)
+    local new_class = create_type(name, keyword.class)
     --endregion
-    ClassMetadataTable.Add(newClass, name)
+    type_meta_data.Add(new_class, name)
 
     --region extend
     -- object is default class
-    baseClass = baseClass or object
+    base_class = base_class or object
 
-    if not ClassValidator.Is(baseClass) then
-        error("base class is not a valid class, baseClass=" .. tostring(baseClass))
+    if not ClassValidator.Is(base_class) then
+        error("Invalid base class.")
     end
 
-    setmetatable(newClass, baseClass)
+    setmetatable(new_class, base_class)
 
-    --base
-    newClass.base = baseClass.new
-
-    -- inherit __tostring
-    newClass.__tostring = baseClass.__tostring or newClass.__tostring
+    new_class.base = base_class
+    new_class.__tostring = base_class.__tostring or new_class.__tostring
 
     --endregion
-    ClassMetadataTable.AddBase(newClass, baseClass)
 
-    return newClass
+    return new_class
 end
 
 return class

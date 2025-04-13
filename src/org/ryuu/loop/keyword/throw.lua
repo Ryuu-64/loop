@@ -1,7 +1,7 @@
 ﻿---@generic T:Exception
 local throw = function(exception)
-    local exceptionToString = tostring(exception)
-    error(exceptionToString)
+    local exception_to_string = tostring(exception)
+    error(exception_to_string)
 end
 
 return throw

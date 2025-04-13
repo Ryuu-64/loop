@@ -23,7 +23,7 @@ end
 ---@return T
 function Exception:new(message, innerException)
     ---@type Exception
-    local this = Exception.base(self)
+    local this = Exception.constructor(self)
     this.message = message
     this.innerException = innerException
     return this

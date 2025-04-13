@@ -1,7 +1,7 @@
 ---@param _name string
 ---@param _type string
 ---@return type
-local createType = function(_name, _type)
+local create_type = function(_name, _type)
     ---@type type
     local type = {
         _name = _name,
@@ -12,4 +12,4 @@ local createType = function(_name, _type)
     return type
 end
 
-return createType
+return create_type
