@@ -1,5 +1,5 @@
 package.path = package.path .. ";../src/org/ryuu/loop/keyword/?.lua"
-local object = require "org.ryuu.loop.keyword.object"
+local object = require "top.ryuu.loop.keyword.object"
 
 describe("object Test Suite", function()
     it("should correctly setup metatable relationships", function()

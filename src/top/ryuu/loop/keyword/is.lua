@@ -21,7 +21,7 @@ local is = function(instance, type)
     repeat
         --region class
         if
-            metatable._type == type._type and
+            metatable._attribute == type._attribute and
             metatable._name == type._name and
             metatable._interfaces == type._interfaces and
             metatable.__tostring == type.__tostring
@@ -34,7 +34,7 @@ local is = function(instance, type)
         for i = 1, #metatable._interfaces do
             local interface = metatable._interfaces[i]
             if
-                interface._type == type._type and
+                interface._attribute == type._attribute and
                 interface._name == type._name and
                 interface._interfaces == type._interfaces and
                 interface.__tostring == type.__tostring

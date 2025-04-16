@@ -1,5 +1,5 @@
 package.path = package.path .. ";../src/org/ryuu/loop/keyword/?.lua"
-local readonly = require "org.ryuu.loop.keyword.readonly"
+local readonly = require "top.ryuu.loop.keyword.readonly"
 
 describe("readonly table", function()
     local table = { name = "Alice", age = 30 }

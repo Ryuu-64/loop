@@ -1,8 +1,7 @@
-﻿local keyword = require "org.ryuu.loop.internal.keyword"
+﻿local keyword = require "top.ryuu.loop.internal.keyword"
 
-local ClassValidator = {}
-
-function ClassValidator.Is(class)
+---@param class type
+return function(class)
     if type(class) ~= "table" then
         return false
     end
@@ -11,7 +10,7 @@ function ClassValidator.Is(class)
         return false
     end
 
-    if class._type ~= keyword.class then
+    if class._attribute ~= keyword.class then
         return false
     end
 
@@ -21,5 +20,3 @@ function ClassValidator.Is(class)
 
     return true
 end
-
-return ClassValidator

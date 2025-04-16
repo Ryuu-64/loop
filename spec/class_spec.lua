@@ -1,13 +1,13 @@
 package.path = package.path .. ";../src/org/ryuu/loop/internal/?.lua"
-local class = require "org.ryuu.loop.keyword.class"
-local object = require "org.ryuu.loop.keyword.object"
-local type_meta_data = require "org.ryuu.loop.internal.type_meta_data"
+local class = require "top.ryuu.loop.keyword.class"
+local object = require "top.ryuu.loop.keyword.object"
+local type_meta_data = require "top.ryuu.loop.internal.type_meta_data"
 
 describe("Class 创建功能测试套件", function()
     it("应正确创建继承基类的类型", function()
         local Animal = class("Animal", object)
         assert.are.equal(getmetatable(Animal), object)
-        assert.are.equal(object, Animal.base)
+        assert.are.equal(object, Animal._base_class)
     end)
 
     it("should extend object by default", function()
@@ -20,23 +20,29 @@ describe("异常场景处理测试", function()
     it("应阻止重复类名创建", function()
         class("UniqueClass")
 
-        assert.has_error(function()
-            class("UniqueClass")
-        end, "Type already exist, name=UniqueClass.")
+        assert.has_error(
+                function()
+                    class("UniqueClass")
+                end,
+                "Type already exist, name=UniqueClass."
+        )
     end)
 
     it("应拒绝非类类型作为基类", function()
         local invalidBase = {}
-        assert.has_error(function()
-            class("InvalidBaseClass", invalidBase)
-        end, "Invalid base class.")
+        assert.has_error(
+                function()
+                    class("InvalidBaseClass", invalidBase)
+                end,
+                "Invalid base class."
+        )
     end)
 end)
 
 describe("元数据系统集成测试", function()
     it("应在类型元数据系统中注册新类", function()
         local MetaClass = class("MetaClass")
-        assert.is_true(type_meta_data.Has("MetaClass"))
+        assert.is_true(type_meta_data.has("MetaClass"))
         local metadata = type_meta_data.name_type_map["MetaClass"]
         assert.are.equal(metadata._name, "MetaClass")
     end)
@@ -114,7 +120,7 @@ describe("方法继承测试", function()
 
         local Child = class("Child", Parent)
         function Child:greet()
-            return self.base.greet(self) .. " and Child"
+            return self._base_class.greet(self) .. " and Child"
         end
 
         local instance = Child:new()
