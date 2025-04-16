@@ -4,7 +4,7 @@ local type_meta_data = require "top.ryuu.loop.internal.type_meta_data"
 
 ---@param name string
 ---@return type
-return function(name)
+local interface = function(name)
     if type_meta_data.has(name) then
         error("Type already exist, name=" .. name .. ".")
     end
@@ -14,3 +14,5 @@ return function(name)
     type_meta_data.add(interface, name)
     return interface
 end
+
+return interface
