@@ -1,6 +1,8 @@
 ﻿local keyword = require "top.ryuu.loop.internal.keyword"
 local ArgumentException = require "top.ryuu.loop.exception.ArgumentException"
 
+---@generic T:Exception
+---@return T
 local get_interface_exception
 get_interface_exception = function(interface)
     if interface == nil then
@@ -30,13 +32,12 @@ get_interface_exception = function(interface)
         local exception = get_interface_exception(currInterface)
         if exception ~= nil then
             reason = reason ..
-                    "interface._interfaces[" .. i .. "]" ..
-                    " (" .. currInterface._name .. ") is not a valid interface: " ..
-                    tostring(exception) .. "\n"
+                "interface._interfaces[" .. i .. "]" ..
+                " (" .. currInterface._name .. ") is not a valid interface: " ..
+                tostring(exception) .. "\n"
         end
     end
     --endregion
-
     if reason ~= nil then
         return ArgumentException:new(reason)
     end

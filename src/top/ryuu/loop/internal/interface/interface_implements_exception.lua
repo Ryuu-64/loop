@@ -3,6 +3,9 @@ local get_interface_exception = require "top.ryuu.loop.internal.interface.get_in
 local ArgumentException = require "top.ryuu.loop.exception.ArgumentException"
 local ArgumentNilException = require "top.ryuu.loop.exception.ArgumentNilException"
 
+---@generic T:Exception
+---@param interfaces any
+---@return T
 return function(interfaces)
     if interfaces == nil then
         return ArgumentNilException:new("interfaces is nil")

@@ -1,4 +1,4 @@
-﻿---@generic T
+﻿---@generic T:table
 ---@param proxy_table T
 ---@return T
 local function readonly(proxy_table)

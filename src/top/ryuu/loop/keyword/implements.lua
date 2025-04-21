@@ -4,10 +4,9 @@ local class_implements = require "top.ryuu.loop.internal.class.class_implements"
 local interface_implements = require "top.ryuu.loop.internal.interface.interface_implements"
 local ArgumentException = require "top.ryuu.loop.exception.ArgumentException"
 
---TODO interfaces type and size validation
----@param self type class or interface
----@param interfaces table<type>
----@return void
+---@param self _type class or interface
+---@param interfaces table<_type>
+---@return nil
 local implements = function(self, interfaces)
     if self._attribute == keyword.class then
         class_implements(self, interfaces)

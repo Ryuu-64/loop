@@ -4,11 +4,12 @@ local type_meta_data = require "top.ryuu.loop.internal.type_meta_data"
 local is_class = require "top.ryuu.loop.internal.class.is_class"
 local object = require "top.ryuu.loop.keyword.object"
 
----@generic T:type
+---@generic T:object
+---@generic U:object
 ---@param name string
----@param base_class type
----@return T
-local function class(name, base_class)
+---@param base_class T
+---@return U
+return function(name, base_class)
     if type_meta_data.has(name) then
         error("Type already exist, name=" .. name .. ".")
     end
@@ -20,14 +21,11 @@ local function class(name, base_class)
         error("Invalid base class.")
     end
 
-    ---@type type
-    local new_class = create_type(name, keyword.class)
-    new_class._base_class = base_class
-    new_class.__tostring = base_class.__tostring or new_class.__tostring
-    setmetatable(new_class, base_class)
+    local new_type = create_type(name, keyword.class)
+    new_type._base = base_class
+    new_type.__tostring = base_class.__tostring or new_type.__tostring
+    setmetatable(new_type, base_class)
 
-    type_meta_data.add(new_class, name)
-    return new_class
+    type_meta_data.add(new_type, name)
+    return new_type
 end
-
-return class

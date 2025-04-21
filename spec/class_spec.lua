@@ -21,20 +21,20 @@ describe("异常场景处理测试", function()
         class("UniqueClass")
 
         assert.has_error(
-                function()
-                    class("UniqueClass")
-                end,
-                "Type already exist, name=UniqueClass."
+            function()
+                class("UniqueClass")
+            end,
+            "Type already exist, name=UniqueClass."
         )
     end)
 
     it("应拒绝非类类型作为基类", function()
         local invalidBase = {}
         assert.has_error(
-                function()
-                    class("InvalidBaseClass", invalidBase)
-                end,
-                "Invalid base class."
+            function()
+                class("InvalidBaseClass", invalidBase)
+            end,
+            "Invalid base class."
         )
     end)
 end)
@@ -113,14 +113,16 @@ describe("方法继承测试", function()
     end)
 
     it("应重写父类方法", function()
+        ---@class Parent:object
         local Parent = class("Parent")
         function Parent:greet()
             return "Hello from Parent"
         end
 
+        ---@class Child:Parent
         local Child = class("Child", Parent)
         function Child:greet()
-            return self._base_class.greet(self) .. " and Child"
+            return self._base.greet(self) .. " and Child"
         end
 
         local instance = Child:new()

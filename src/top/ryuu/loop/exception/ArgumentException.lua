@@ -2,4 +2,5 @@
 local Exception = require "top.ryuu.loop.exception.Exception"
 
 ---@class ArgumentException:Exception
-return class("ArgumentException", Exception)
+local ArgumentException = class("ArgumentException", Exception)
+return ArgumentException

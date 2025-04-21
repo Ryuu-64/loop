@@ -1,6 +1,6 @@
 ﻿local class = require "top.ryuu.loop.keyword.class"
 
----@class Exception:object
+---@class Exception:_type
 ---@field message string
 ---@field inner_exception Exception
 local Exception = class("Exception")
@@ -18,11 +18,11 @@ function Exception:__tostring()
 end
 
 ---@generic T:Exception
----@field message string
----@field innerException T
+---@param message string
+---@param inner_exception T
 ---@return T
 function Exception:new(message, inner_exception)
-    ---@type Exception
+    ---@class Exception
     local this = Exception:constructor()
     this.message = message
     this.inner_exception = inner_exception

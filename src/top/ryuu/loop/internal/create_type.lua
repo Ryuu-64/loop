@@ -1,8 +1,7 @@
 ---@param _name string
 ---@param _attribute string
----@return type
-local create_type = function(_name, _attribute)
-    ---@type type
+---@return _type
+return function(_name, _attribute)
     local type = {
         _name = _name,
         _attribute = _attribute,
@@ -11,5 +10,3 @@ local create_type = function(_name, _attribute)
     type.__index = type
     return type
 end
-
-return create_type

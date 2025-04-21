@@ -1,4 +1,5 @@
-﻿local throw = require "top.ryuu.loop.keyword.throw"
+﻿local keyword = require "top.ryuu.loop.internal.keyword"
+local throw = require "top.ryuu.loop.keyword.throw"
 local are_interfaces = require "top.ryuu.loop.internal.interface.are_interfaces"
 local is_interface = require "top.ryuu.loop.internal.interface.is_interface"
 local is_class = require "top.ryuu.loop.internal.class.is_class"
@@ -13,8 +14,7 @@ local function get_function_info_map(type_table)
         local current_class_or_interface = table.remove(queue)
         count = count + 1
         for name, value in pairs(current_class_or_interface) do
-            -- _base_class is field in "type"
-            if name == "_base_class" and type(value) == "table" then
+            if name == keyword.base and type(value) == "table" then
                 table.insert(queue, value)
             elseif type(value) == "function" then
                 local info = debug.getinfo(value, "u")
@@ -65,13 +65,13 @@ local function function_invalid_reason(function_name, class_info, infoInInterfac
     else
         if class_info.isvararg ~= infoInInterface.isvararg then
             reason = reason .. "Incorrect 'Variable Number of Arguments'. " ..
-                    "Expected " .. tostring(infoInInterface.isvararg) .. "," ..
-                    " but " .. tostring(class_info.isvararg) .. " was provided."
+                "Expected " .. tostring(infoInInterface.isvararg) .. "," ..
+                " but " .. tostring(class_info.isvararg) .. " was provided."
         end
         if class_info.nparams ~= infoInInterface.nparams then
             reason = reason .. "Incorrect number of arguments. " ..
-                    "Expected " .. infoInInterface.nparams .. " arguments," ..
-                    "but " .. class_info.nparams .. " was provided."
+                "Expected " .. infoInInterface.nparams .. " arguments," ..
+                "but " .. class_info.nparams .. " was provided."
         end
     end
 
@@ -178,10 +178,12 @@ local function get_exception(class, interfaces)
     end
 
     return ArgumentException:new(
-            "Error implementing interfaces " .. interfaceNameString .. " for '" .. class._name .. "': " .. messages
+        "Error implementing interfaces " .. interfaceNameString .. " for '" .. class._name .. "': " .. messages
     )
 end
 
+---@param class _type
+---@param interfaces table<_type>
 return function(class, interfaces)
     if not is_valid(class, interfaces) then
         local inner_exception = get_exception(class, interfaces)

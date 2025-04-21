@@ -1,7 +1,6 @@
 ﻿---Checks if instance is compatible with a given type.
----@generic T:object
----@param instance T
----@param type type
+---@param instance object
+---@param type _type
 ---@return boolean
 local is = function(instance, type)
     if type == nil then
@@ -12,7 +11,7 @@ local is = function(instance, type)
         return false
     end
 
-    ---@type type
+    ---@type _type
     local metatable = getmetatable(instance)
     if metatable == nil then
         return false
