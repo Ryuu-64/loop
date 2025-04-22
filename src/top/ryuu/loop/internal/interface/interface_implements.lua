@@ -2,8 +2,8 @@
 local are_interfaces = require "top.ryuu.loop.internal.interface.are_interfaces"
 local get_interface_exception = require "top.ryuu.loop.internal.interface.get_interface_exception"
 
----@param self _type
----@param bases table<_type>
+---@param self Type
+---@param bases table<Type>
 return function(self, bases)
     if not are_interfaces(bases) then
         local exception = get_interface_exception(bases)

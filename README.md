@@ -1,7 +1,7 @@
 # loop
 
 ```shell
-busted ./spec/ -o plainTerminal
+busted ./spec/ -o ./busted/outputHandlers/testEndLateWrite
 ```
 
 ```shell

@@ -7,7 +7,7 @@ local object = require "top.ryuu.loop.keyword.object"
 ---@generic T:object
 ---@generic U:object
 ---@param name string
----@param base_class T
+---@param base_class T|nil
 ---@return U
 return function(name, base_class)
     if type_meta_data.has(name) then

@@ -1,10 +1,10 @@
----@param _name string
----@param _attribute string
----@return _type
-return function(_name, _attribute)
+---@param name string
+---@param attribute string
+---@return Type
+return function(name, attribute)
     local type = {
-        _name = _name,
-        _attribute = _attribute,
+        _name = name,
+        _attribute = attribute,
         _interfaces = {}
     }
     type.__index = type

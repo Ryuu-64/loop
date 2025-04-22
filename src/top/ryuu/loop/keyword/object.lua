@@ -30,7 +30,7 @@ function object:new(...)
     return this
 end
 
----@param self _type The type of the object to be instantiated
+---@param self Type The type of the object to be instantiated
 function object:constructor(...)
     return self._base.new(self, ...)
 end

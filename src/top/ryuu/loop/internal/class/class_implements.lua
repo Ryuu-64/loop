@@ -106,8 +106,8 @@ local function interface_invalid_message(class, interface)
         return ""
     end
 
-    local interfaceReason = "Can't implement interface '" .. interface._name .. "': "
-    return interfaceReason .. function_reason
+    local interface_reason = "Can't implement interface '" .. interface._name .. "': "
+    return interface_reason .. function_reason
 end
 
 local function get_all_interfaces(interfaces)
@@ -182,8 +182,8 @@ local function get_exception(class, interfaces)
     )
 end
 
----@param class _type
----@param interfaces table<_type>
+---@param class Type
+---@param interfaces table<Type>
 return function(class, interfaces)
     if not is_valid(class, interfaces) then
         local inner_exception = get_exception(class, interfaces)

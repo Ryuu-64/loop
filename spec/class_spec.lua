@@ -7,7 +7,7 @@ describe("Class 创建功能测试套件", function()
     it("应正确创建继承基类的类型", function()
         local Animal = class("Animal", object)
         assert.are.equal(getmetatable(Animal), object)
-        assert.are.equal(object, Animal._base_class)
+        assert.are.equal(object, Animal._base)
     end)
 
     it("should extend object by default", function()
@@ -122,8 +122,10 @@ describe("方法继承测试", function()
         ---@class Child:Parent
         local Child = class("Child", Parent)
         function Child:greet()
-            return self._base.greet(self) .. " and Child"
-        end
+              ---@class Parent
+              local base = self._base
+              return base.greet(self) .. " and Child"
+          end
 
         local instance = Child:new()
         assert.are.equal(instance:greet(), "Hello from Parent and Child")

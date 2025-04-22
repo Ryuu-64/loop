@@ -1,8 +1,8 @@
 ﻿local class = require "top.ryuu.loop.keyword.class"
 
----@class Exception:_type
+---@class Exception:Type
 ---@field message string
----@field inner_exception Exception
+---@field inner_exception Exception|nil
 local Exception = class("Exception")
 
 function Exception:__tostring()
@@ -19,7 +19,7 @@ end
 
 ---@generic T:Exception
 ---@param message string
----@param inner_exception T
+---@param inner_exception T|nil
 ---@return T
 function Exception:new(message, inner_exception)
     ---@class Exception

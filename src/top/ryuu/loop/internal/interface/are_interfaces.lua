@@ -1,6 +1,6 @@
 local keyword = require "top.ryuu.loop.internal.keyword"
 
----@param interfaces table<_type>
+---@param interfaces table<Type>
 ---@return boolean
 return function(interfaces)
     if interfaces == nil then
@@ -11,14 +11,14 @@ return function(interfaces)
         return false
     end
 
-    ---@type table<_type>
+    ---@type table<Type>
     local temp_interfaces = {}
     for i = 1, #interfaces do
         temp_interfaces[i] = interfaces[i]
     end
 
     while #temp_interfaces > 0 do
-        ---@type _type
+        ---@type Type
         local current = table.remove(temp_interfaces)
 
         if current == nil or
