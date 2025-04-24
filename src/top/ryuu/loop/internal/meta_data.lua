@@ -5,11 +5,11 @@ local type_meta_data = {
 }
 type_meta_data.__index = type_meta_data
 
----@param self object
+---@param type object
 ---@param name string
-function type_meta_data.add(self, name)
-    type_meta_data.type_name_map[self] = name
-    type_meta_data.name_type_map[name] = self
+function type_meta_data.add(name, type)
+    type_meta_data.name_type_map[name] = type
+    type_meta_data.type_name_map[type] = name
 end
 
 ---@param name string

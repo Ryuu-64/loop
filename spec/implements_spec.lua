@@ -1,11 +1,11 @@
 local implements = require "top.ryuu.loop.keyword.implements"
 local interface = require "top.ryuu.loop.keyword.interface"
 local class = require "top.ryuu.loop.keyword.class"
-local type_meta_data = require "top.ryuu.loop.internal.type_meta_data"
+local meta_data = require "top.ryuu.loop.internal.meta_data"
 
 describe("implements 功能", function()
     before_each(function()
-        type_meta_data.clear()
+        meta_data.clear()
     end)
 
     describe("传入类和接口时", function()
@@ -23,7 +23,7 @@ describe("implements 功能", function()
         it("当类没有实现接口的方法时，应当报错", function()
             local MyInterface = interface("MyInterface")
             function MyInterface.foo()
-            end
+                  end
             local MyClass = class("MyClass")
             assert.has_error(
                     function()

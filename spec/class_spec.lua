@@ -1,11 +1,11 @@
 package.path = package.path .. ";../src/org/ryuu/loop/internal/?.lua"
 local class = require "top.ryuu.loop.keyword.class"
 local object = require "top.ryuu.loop.keyword.object"
-local type_meta_data = require "top.ryuu.loop.internal.type_meta_data"
+local meta_data = require "top.ryuu.loop.internal.meta_data"
 
 describe("Class 创建功能测试套件", function()
     it("应正确创建继承基类的类型", function()
-        local Animal = class("Animal", object)
+        local Animal = class("Animal")
         assert.are.equal(getmetatable(Animal), object)
         assert.are.equal(object, Animal._base)
     end)
@@ -42,8 +42,8 @@ end)
 describe("元数据系统集成测试", function()
     it("应在类型元数据系统中注册新类", function()
         local MetaClass = class("MetaClass")
-        assert.is_true(type_meta_data.has("MetaClass"))
-        local metadata = type_meta_data.name_type_map["MetaClass"]
+        assert.is_true(meta_data.has("MetaClass"))
+        local metadata = meta_data.name_type_map["MetaClass"]
         assert.are.equal(metadata._name, "MetaClass")
     end)
 end)
@@ -113,7 +113,7 @@ describe("方法继承测试", function()
     end)
 
     it("应重写父类方法", function()
-        ---@class Parent:object
+        ---@class Parent:Class
         local Parent = class("Parent")
         function Parent:greet()
             return "Hello from Parent"
@@ -122,10 +122,10 @@ describe("方法继承测试", function()
         ---@class Child:Parent
         local Child = class("Child", Parent)
         function Child:greet()
-              ---@class Parent
-              local base = self._base
-              return base.greet(self) .. " and Child"
-          end
+            ---@class Parent
+            local base = self._base
+            return base.greet(self) .. " and Child"
+        end
 
         local instance = Child:new()
         assert.are.equal(instance:greet(), "Hello from Parent and Child")

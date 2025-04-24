@@ -1,17 +1,17 @@
 ﻿local keyword = require "top.ryuu.loop.internal.keyword"
-local create_type = require "top.ryuu.loop.internal.create_type"
-local type_meta_data = require "top.ryuu.loop.internal.type_meta_data"
+local create_class = require "top.ryuu.loop.internal.create_class"
 
 ---@class object
 --Supports all classes in the class hierarchy and provides low-level services to derived classes.
 --It is the root of the type hierarchy.
 ---@field _base object
+---@field _type Type
 --If this is an interface or has no base class null is returned.
 --Object is the only Type that does not have a base class.
 ---@field _name string
 --Access from object's type.
 ---@field __tostring function():string
-local object = create_type("object", keyword.class)
+local object = create_class("object", keyword.class)
 
 ---@generic T:object
 ---@param a T
@@ -25,7 +25,9 @@ end
 ---@return T
 function object:new(...)
     ---@class object
-    local this = {}
+    local this = {
+        _type = self
+    }
     setmetatable(this, self)
     return this
 end
@@ -35,6 +37,8 @@ function object:constructor(...)
     return self._base.new(self, ...)
 end
 
-type_meta_data.add(object, "object")
+function object:getType(...)
+    return self._type
+end
 
 return object

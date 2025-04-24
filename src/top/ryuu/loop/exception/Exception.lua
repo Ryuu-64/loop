@@ -1,6 +1,6 @@
 ﻿local class = require "top.ryuu.loop.keyword.class"
 
----@class Exception:Type
+---@class Exception:object
 ---@field message string
 ---@field inner_exception Exception|nil
 local Exception = class("Exception")

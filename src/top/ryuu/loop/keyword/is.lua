@@ -1,6 +1,7 @@
 ﻿---Checks if instance is compatible with a given type.
+---@generic T object
 ---@param instance object
----@param type Type
+---@param type T
 ---@return boolean
 local is = function(instance, type)
     if type == nil then
