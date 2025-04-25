@@ -3,7 +3,7 @@ local class = require "top.ryuu.loop.keyword.class"
 local object = require "top.ryuu.loop.keyword.object"
 local meta_data = require "top.ryuu.loop.internal.meta_data"
 
-describe("Class 创建功能测试套件", function()
+describe("class 创建功能测试套件", function()
     it("应正确创建继承基类的类型", function()
         local Animal = class("Animal")
         assert.are.equal(getmetatable(Animal), object)

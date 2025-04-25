@@ -24,7 +24,7 @@ end
 ---@param self T The type of the object to be instantiated
 ---@return T
 function object:new(...)
-    ---@class object
+    ---@class T
     local this = {
         _type = self
     }
@@ -32,13 +32,9 @@ function object:new(...)
     return this
 end
 
----@param self Type The type of the object to be instantiated
+---@param self object The type of the object to be instantiated
 function object:constructor(...)
     return self._base.new(self, ...)
-end
-
-function object:getType(...)
-    return self._type
 end
 
 return object

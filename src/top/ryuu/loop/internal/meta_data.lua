@@ -1,26 +1,26 @@
----@class type_meta_data
-local type_meta_data = {
+---@class meta_data
+local meta_data = {
     type_name_map = {},
     name_type_map = {}
 }
-type_meta_data.__index = type_meta_data
+meta_data.__index = meta_data
 
 ---@param type object
 ---@param name string
-function type_meta_data.add(name, type)
-    type_meta_data.name_type_map[name] = type
-    type_meta_data.type_name_map[type] = name
+function meta_data.add(name, type)
+    meta_data.name_type_map[name] = type
+    meta_data.type_name_map[type] = name
 end
 
 ---@param name string
 ---@return boolean
-function type_meta_data.has(name)
-    return type_meta_data.name_type_map[name] ~= nil
+function meta_data.has(name)
+    return meta_data.name_type_map[name] ~= nil
 end
 
-function type_meta_data.clear()
-    type_meta_data.type_name_map = {}
-    type_meta_data.name_type_map = {}
+function meta_data.clear()
+    meta_data.type_name_map = {}
+    meta_data.name_type_map = {}
 end
 
-return type_meta_data
+return meta_data

@@ -4,8 +4,8 @@ local meta_data = require "top.ryuu.loop.internal.meta_data"
 local is_class = require "top.ryuu.loop.internal.class.is_class"
 local object = require "top.ryuu.loop.keyword.object"
 
----@generic T:Class
----@generic U:Class
+---@generic T:object
+---@generic U:object
 ---@param name string
 ---@param base_class T|nil
 ---@return U
