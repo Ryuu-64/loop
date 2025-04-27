@@ -3,58 +3,54 @@ local object = require "top.ryuu.loop.keyword.object"
 local class = require "top.ryuu.loop.keyword.class"
 local meta_data = require "top.ryuu.loop.internal.meta_data"
 
-describe("object 基类测试", function()
+describe("Object test suite", function()
     before_each(function()
         meta_data.clear()
     end)
 
-    -- 基础实例化测试
-    describe("new() 方法", function()
-        it("应正确创建实例并设置元表", function()
+    describe("new()", function()
+        it("should create instance with correct metatable setup", function()
             local instance = object:new()
-            assert.is_table(instance, "实例应为表")
-            assert.are.equal(instance._type, object, "_type 属性应指向 object 类")
-            assert.are_not.equal(instance, object, "instance 本身不应该是 object 类")
-            assert.are.equal(getmetatable(instance), object, "元表应指向 object 类")
-            assert.are.equal(getmetatable(instance).__index, object, "")
+            assert.is_table(instance, "instance should be a table")
+            assert.are.equal(instance._type, object, "_type should point to object")
+            assert.are_not.equal(instance, object, "instance should not be object")
+            assert.are.equal(getmetatable(instance), object, "metatable should point to object")
+            assert.are.equal(getmetatable(instance).__index, object, "__index should point to object")
         end)
     end)
 
-    -- 相等性测试
-    describe("__eq 元方法", function()
-        it("相同实例应返回 true", function()
+    describe("__eq", function()
+        it("should return true for same instance references", function()
             local a = object:new()
             local b = a
-            assert.is_true(a == b, "相同引用应相等")
+            assert.is_true(a == b, "identical references should be equal")
         end)
 
-        it("不同实例应返回 false", function()
+        it("should return false for different instances", function()
             local a = object:new()
             local b = object:new()
             assert.is_false(a == b, "不同实例应不相等")
         end)
     end)
 
-    -- 继承测试
-    describe("继承机制", function()
-        it("子类实例应继承 object 属性", function()
+    describe("inheritance", function()
+        it("subclass instances should inherit from object", function()
             local Child = class("Child")
             local instance = Child:new()
-            assert.are.equal(instance._type, Child, "_type 应指向子类")
-            assert.are.equal(instance._type._base, object, "基类应为 object")
+            assert.are.equal(instance._type, Child, "_type should point to subclass")
+            assert.are.equal(instance._type._base, object, "base class should be object")
         end)
     end)
 
-    -- 构造函数测试
-    describe("constructor() 方法", function()
-        it("应调用基类的 new 方法", function()
+    describe("constructor()", function()
+        it("should invoke base class new function", function()
             local Child = class("Child")
             spy.on(object, "new")
             Child:new()
             assert.spy(object.new).was.called_with(match.is_ref(Child))
         end)
 
-        it("应传递构造参数到基类", function()
+        it("should passing parameters to base classes", function()
             local ClassA = class("ClassA")
             function ClassA:new(foo)
                 local instance = ClassA:constructor()
@@ -86,14 +82,13 @@ describe("object 基类测试", function()
         end)
     end)
 
-    -- 异常场景测试
-    describe("异常处理", function()
-        it("非对象类型调用 new 应报错", function()
+    describe("exception handling", function()
+        it("should throw error when non-object calls new()", function()
             assert.has_error(
                 function()
                     object.new("invalid_self")
                 end,
-                -- todo
+                -- todo throw custom error instead
                 "bad argument #2 to 'setmetatable' (nil or table expected, got string)"
             )
         end)

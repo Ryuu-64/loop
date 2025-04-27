@@ -3,13 +3,13 @@ local keyword = require "top.ryuu.loop.internal.keyword"
 local meta_data = require "top.ryuu.loop.internal.meta_data"
 local interface = require "top.ryuu.loop.keyword.interface"
 
-describe("interface 功能", function()
+describe("Interface test suite", function()
     before_each(function()
         meta_data.clear()
     end)
 
-    describe("传入名称时", function()
-        it("应该正常创建接口", function()
+    describe("when passing name", function()
+        it("should create interface", function()
             local MyInterface = interface("MyInterface")
             assert.are.equal("MyInterface", MyInterface._name)
             assert.are.equal(keyword.interface, MyInterface._attribute)

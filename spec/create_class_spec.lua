@@ -2,7 +2,7 @@ package.path = package.path .. ";../src/org/ryuu/loop/internal/?.lua"
 local keyword = require "top.ryuu.loop.internal.keyword"
 local create_class = require "top.ryuu.loop.internal.create_class"
 
-describe("Create Type Test Suite", function()
+describe("Create class test suite", function()
     it("should create class", function()
         local MyClass = create_class("MyClass", keyword.class)
         assert.are.equal("MyClass", MyClass._name)
