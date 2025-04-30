@@ -1,17 +1,15 @@
 ﻿local keyword = require "top.ryuu.loop.internal.keyword"
-local create_class = require "top.ryuu.loop.internal.create_class"
+local create_type = require "top.ryuu.loop.internal.create_type"
 
----@class object
 --Supports all classes in the class hierarchy and provides low-level services to derived classes.
 --It is the root of the type hierarchy.
----@field _base object
----@field _type Type
+---@class object
 --If this is an interface or has no base class null is returned.
 --Object is the only Type that does not have a base class.
----@field _name string
---Access from object's type.
+---@field _base object|nil
+---@field _type Type
 ---@field __tostring function():string
-local object = create_class("object", keyword.class)
+local object = create_type("object", keyword.class)
 
 ---@generic T:object
 ---@param a T

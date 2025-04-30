@@ -1,19 +1,15 @@
 local meta_data = require "top.ryuu.loop.internal.meta_data"
 
----@class Class:object
----@field _name string
----@field _attribute string
----@field _interfaces table<Class>
 ---@param name string
 ---@param attribute string
----@return Class
+---@return Type
 return function(name, attribute)
-    local class = {
+    local _type = {
         _name = name,
         _attribute = attribute,
         _interfaces = {}
     }
-    class.__index = class
-    meta_data.add(name, class)
-    return class
+    _type.__index = _type
+    meta_data.add(name, _type)
+    return _type
 end

@@ -1,5 +1,5 @@
 ﻿local keyword = require "top.ryuu.loop.internal.keyword"
-local create_class = require "top.ryuu.loop.internal.create_class"
+local create_type = require "top.ryuu.loop.internal.create_type"
 local meta_data = require "top.ryuu.loop.internal.meta_data"
 
 ---@generic T:object
@@ -10,5 +10,5 @@ return function(name)
         error("Type already exist, name=" .. name .. ".")
     end
 
-    return create_class(name, keyword.interface)
+    return create_type(name, keyword.interface)
 end

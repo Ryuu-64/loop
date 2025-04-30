@@ -1,30 +1,28 @@
 ﻿local keyword = require "top.ryuu.loop.internal.keyword"
-local create_class = require "top.ryuu.loop.internal.create_class"
+local create_type = require "top.ryuu.loop.internal.create_type"
 local meta_data = require "top.ryuu.loop.internal.meta_data"
 local is_class = require "top.ryuu.loop.internal.class.is_class"
 local object = require "top.ryuu.loop.keyword.object"
 
----@generic T:object
----@generic U:object
 ---@param name string
----@param base_class T|nil
----@return U
-return function(name, base_class)
+---@param base object|nil
+---@return Type
+return function(name, base)
     if meta_data.has(name) then
         error("Type already exist, name=" .. name .. ".")
     end
 
     -- object is default class
-    base_class = base_class or object
+    base = base or object
 
-    if not is_class(base_class) then
+    if not is_class(base) then
         error("Invalid base class.")
     end
 
-    local new_class = create_class(name, keyword.class)
-    new_class._base = base_class
-    new_class.__tostring = base_class.__tostring or new_class.__tostring
-    setmetatable(new_class, base_class)
+    local _type = create_type(name, keyword.class)
+    _type._base = base
+    _type.__tostring = base.__tostring or _type.__tostring
+    setmetatable(_type, base)
 
-    return new_class
+    return _type
 end
