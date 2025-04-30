@@ -1,7 +1,8 @@
-local meta_data = require "top.ryuu.loop.internal.meta_data"
+local runtime = require "top.ryuu.loop.runtime.runtime"
+local meta_data = runtime.meta_data
 
 ---@param object object
----@return Type
+---@return object
 return function(object)
     return meta_data.name_type_map[object._name]
 end

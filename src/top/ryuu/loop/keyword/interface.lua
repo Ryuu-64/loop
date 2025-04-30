@@ -1,6 +1,7 @@
 ﻿local keyword = require "top.ryuu.loop.internal.keyword"
-local create_type = require "top.ryuu.loop.internal.create_type"
-local meta_data = require "top.ryuu.loop.internal.meta_data"
+local runtime = require "top.ryuu.loop.runtime.runtime"
+local create_type = runtime.create_type
+local meta_data = runtime.meta_data
 
 ---@generic T:object
 ---@param name string

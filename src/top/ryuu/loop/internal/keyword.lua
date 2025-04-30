@@ -17,5 +17,5 @@ return readonly({
     readonly = "readonly",
     is = "is",
     throw = "throw",
-    base = "_base"
+    base = "_base_type"
 })

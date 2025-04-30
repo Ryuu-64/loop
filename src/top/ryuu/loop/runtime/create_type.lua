@@ -1,13 +1,16 @@
-local meta_data = require "top.ryuu.loop.internal.meta_data"
+local meta_data = require "top.ryuu.loop.runtime.meta_data"
 
+---@generic T:object
 ---@param name string
 ---@param attribute string
----@return Type
+---@return T|object|Type
 return function(name, attribute)
+    ---@class Type
     local _type = {
         _name = name,
         _attribute = attribute,
-        _interfaces = {}
+        _interfaces = {},
+        _base_type = nil
     }
     _type.__index = _type
     meta_data.add(name, _type)

@@ -23,10 +23,10 @@ end
 ---@return T
 function Exception:new(message, inner_exception)
     ---@class Exception
-    local this = Exception:constructor()
-    this.message = message
-    this.inner_exception = inner_exception
-    return this
+    local instance = Exception._base_type.new(self)
+    instance.message = message
+    instance.inner_exception = inner_exception
+    return instance
 end
 
 return Exception

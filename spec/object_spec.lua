@@ -1,7 +1,8 @@
 package.path = package.path .. ";../src/org/ryuu/loop/keyword/?.lua"
 local object = require "top.ryuu.loop.keyword.object"
 local class = require "top.ryuu.loop.keyword.class"
-local meta_data = require "top.ryuu.loop.internal.meta_data"
+local runtime = require "top.ryuu.loop.runtime.runtime"
+local meta_data = runtime.meta_data
 
 describe("Object test suite", function()
     before_each(function()
@@ -16,6 +17,44 @@ describe("Object test suite", function()
             assert.are_not.equal(instance, object, "instance should not be object")
             assert.are.equal(getmetatable(instance), object, "metatable should point to object")
             assert.are.equal(getmetatable(instance).__index, object, "__index should point to object")
+        end)
+
+        it("should invoke base class new function", function()
+            local Child = class("Child")
+            spy.on(object, "new")
+            Child:new()
+            assert.spy(object.new).was.called_with(match.is_ref(Child))
+        end)
+
+        it("should passing parameters to base classes", function()
+            local ClassA = class("ClassA")
+            function ClassA:new(foo)
+                local instance = ClassA._base_type.new(self)
+                instance.foo = foo
+                return instance
+            end
+
+            local ClassB = class("ClassB", ClassA)
+            function ClassB:new(foo, bar)
+                local instance = ClassB._base_type.new(self, foo)
+                instance.bar = bar
+                return instance
+            end
+
+            spy.on(ClassB, "new")
+            spy.on(ClassA, "new")
+            ClassB:new(37, 42)
+            assert.spy(ClassB.new)
+                .was.called_with(
+                match.is_ref(ClassB),
+                37,
+                42
+            )
+            assert.spy(ClassA.new)
+                .was.called_with(
+                match.is_ref(ClassB),
+                37
+            )
         end)
     end)
 
@@ -38,47 +77,7 @@ describe("Object test suite", function()
             local Child = class("Child")
             local instance = Child:new()
             assert.are.equal(instance._type, Child, "_type should point to subclass")
-            assert.are.equal(instance._type._base, object, "base class should be object")
-        end)
-    end)
-
-    describe("constructor()", function()
-        it("should invoke base class new function", function()
-            local Child = class("Child")
-            spy.on(object, "new")
-            Child:new()
-            assert.spy(object.new).was.called_with(match.is_ref(Child))
-        end)
-
-        it("should passing parameters to base classes", function()
-            local ClassA = class("ClassA")
-            function ClassA:new(foo)
-                local instance = ClassA:constructor()
-                instance.foo = foo
-                return instance
-            end
-
-            local ClassB = class("ClassB", ClassA)
-            function ClassB:new(foo, bar)
-                local instance = ClassB:constructor(foo)
-                instance.bar = bar
-                return instance
-            end
-
-            spy.on(ClassB, "new")
-            spy.on(ClassA, "new")
-            ClassB:new(37, 42)
-            assert.spy(ClassB.new)
-                .was.called_with(
-                match.is_ref(ClassB),
-                37,
-                42
-            )
-            assert.spy(ClassA.new)
-                .was.called_with(
-                match.is_ref(ClassB),
-                37
-            )
+            assert.are.equal(instance._type._base_type, object, "base class should be object")
         end)
     end)
 
@@ -94,10 +93,16 @@ describe("Object test suite", function()
         end)
     end)
 
-    describe("", function()
-        it("", function()
+    describe("access _type fields by __index", function()
+        it("should access _type fileds", function()
             local instance = object:new()
-            print(instance._name)
+            assert.are.equal(instance._type._name, "object")
+        end)
+        it("should set fields value in instance instead of _type", function()
+            local instance = object:new()
+            instance._name = "foo"
+            assert.are.equal(instance._name, "foo")
+            assert.are.equal(instance._type._name, "object")
         end)
     end)
 end)

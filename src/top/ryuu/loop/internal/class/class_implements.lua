@@ -36,10 +36,8 @@ local function is_class_and_interface_valid(class, interface)
     if not is_interface(interface) then
         return false
     end
-
     local class_info_map = get_function_info_map(class)
     local interface_info_map = get_function_info_map(interface)
-
     for interface_name, interface_info in pairs(interface_info_map) do
         local class_info = class_info_map[interface_name]
         if class_info == nil then

@@ -1,7 +1,8 @@
 local implements = require "top.ryuu.loop.keyword.implements"
 local interface = require "top.ryuu.loop.keyword.interface"
 local class = require "top.ryuu.loop.keyword.class"
-local meta_data = require "top.ryuu.loop.internal.meta_data"
+local runtime = require "top.ryuu.loop.runtime.runtime"
+local meta_data = runtime.meta_data
 
 describe("Implements test suite", function()
     before_each(function()
@@ -32,7 +33,7 @@ describe("Implements test suite", function()
                 function()
                     implements(MyClass, { MyInterface })
                 end,
-                "Exception(message=invalid implements parameters, inner_exception=Exception(message=Error implementing interfaces 'MyInterface' for 'MyClass': Can't implement interface 'MyInterface': Function 'foo' is not implemented: No such function.))"
+                "ArgumentException(message=invalid implements parameters, inner_exception=ArgumentException(message=Error implementing interfaces 'MyInterface' for 'MyClass': Can't implement interface 'MyInterface': Function 'foo' is not implemented: No such function.))"
             )
         end)
         it("should implement multiple interfaces", function()
@@ -105,7 +106,7 @@ describe("Implements test suite", function()
                 function()
                     implements(ParamClass, { ParamInterface })
                 end,
-                "Exception(message=invalid implements parameters, inner_exception=Exception(message=Error implementing interfaces 'ParamInterface' for 'ParamClass': Can't implement interface 'ParamInterface': Function 'func' is not implemented: Incorrect number of arguments. Expected 2 arguments,but 1 was provided.))"
+                "ArgumentException(message=invalid implements parameters, inner_exception=ArgumentException(message=Error implementing interfaces 'ParamInterface' for 'ParamClass': Can't implement interface 'ParamInterface': Function 'func' is not implemented: Incorrect number of arguments. Expected 2 arguments,but 1 was provided.))"
             )
         end)
     end)

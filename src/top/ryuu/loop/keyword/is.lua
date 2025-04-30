@@ -13,26 +13,26 @@ local is = function(instance, type)
     end
 
     ---@type Type
-    local metatable = getmetatable(instance)
-    if metatable == nil then
+    local _type = getmetatable(instance)
+    if _type == nil then
         return false
     end
 
     repeat
         --region class
         if
-            metatable._attribute == type._attribute and
-            metatable._name == type._name and
-            metatable._interfaces == type._interfaces and
-            metatable.__tostring == type.__tostring
+            _type._attribute == type._attribute and
+            _type._name == type._name and
+            _type._interfaces == type._interfaces and
+            _type.__tostring == type.__tostring
         then
             return true
         end
         --endregion
 
         --region interface
-        for i = 1, #metatable._interfaces do
-            local interface = metatable._interfaces[i]
+        for i = 1, #_type._interfaces do
+            local interface = _type._interfaces[i]
             if
                 interface._attribute == type._attribute and
                 interface._name == type._name and
@@ -44,8 +44,8 @@ local is = function(instance, type)
         end
         --endregion
 
-        metatable = getmetatable(metatable)
-    until metatable == nil
+        _type = getmetatable(_type)
+    until _type == nil
 
     return false
 end

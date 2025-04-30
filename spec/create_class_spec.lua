@@ -1,6 +1,7 @@
 package.path = package.path .. ";../src/org/ryuu/loop/internal/?.lua"
 local keyword = require "top.ryuu.loop.internal.keyword"
-local create_type = require "top.ryuu.loop.internal.create_type"
+local runtime = require "top.ryuu.loop.runtime.runtime"
+local create_type = runtime.create_type
 
 describe("Create type test suite", function()
     it("should create class type", function()

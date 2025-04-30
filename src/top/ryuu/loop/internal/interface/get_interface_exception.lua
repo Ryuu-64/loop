@@ -9,26 +9,26 @@ get_interface_exception = function(interface)
         return ArgumentException:new("interface is nil")
     end
 
-    if interface._name == nil then
+    if interface._type._name == nil then
         return ArgumentException:new("interface._name is nil")
     end
 
-    if interface._attribute ~= keyword.interface then
+    if interface._type._attribute ~= keyword.interface then
         return ArgumentException:new("interface._attribute is not 'interface'")
     end
 
     --region _interfaces
-    if interface._interfaces == nil then
+    if interface._type._interfaces == nil then
         return ArgumentException:new("interface._interfaces is nil")
     end
 
-    if type(interface._interfaces) ~= "table" then
+    if type(interface._type._interfaces) ~= "table" then
         return ArgumentException:new("interface._interfaces is not a table")
     end
 
     local reason = ""
-    for i = 1, #interface._interfaces do
-        local currInterface = interface._interfaces[i]
+    for i = 1, #interface._type._interfaces do
+        local currInterface = interface._type._interfaces[i]
         local exception = get_interface_exception(currInterface)
         if exception ~= nil then
             reason = reason ..
