@@ -9,7 +9,7 @@ describe("Implements test suite", function()
         meta_data.clear()
     end)
 
-    describe("When passing classes and interfaces", function()
+    describe("When passing class and interfaces", function()
         it("should implement interface", function()
             local MyInterface = interface("MyInterface")
             function MyInterface.foo()
@@ -91,22 +91,56 @@ describe("Implements test suite", function()
                 implements(MyClass, { ChildInterface })
             end)
         end)
+        describe("Method signature validation", function()
+            it("should throw error when parameter count mismatch", function()
+                local ParamInterface = interface("ParamInterface")
+                function ParamInterface.func(a, b)
+                end
+
+                local ParamClass = class("ParamClass")
+                function ParamClass.func(a)
+                end
+
+                assert.has_error(
+                    function()
+                        implements(ParamClass, { ParamInterface })
+                    end,
+                    "ArgumentException(message=invalid implements parameters, inner_exception=ArgumentException(message=Error implementing interfaces 'ParamInterface' for 'ParamClass': Can't implement interface 'ParamInterface': Function 'func' is not implemented: Incorrect number of arguments. Expected 2 arguments,but 1 was provided.))"
+                )
+            end)
+        end)
     end)
-    describe("Method signature validation", function()
-        it("should throw error when parameter count mismatch", function()
-            local ParamInterface = interface("ParamInterface")
-            function ParamInterface.func(a, b)
-            end
 
-            local ParamClass = class("ParamClass")
-            function ParamClass.func(a)
-            end
+    describe("When passing interface and interfaces", function()
+        it("should implements", function()
+            local ChildInterface = interface("ChildInterface")
+            local BaseInterface = interface("BaseInterface")
+            assert.has_no.errors(function()
+                implements(ChildInterface, { BaseInterface })
+            end)
+        end)
 
+        it("should throw error when interface invalid", function()
+            local MyInterface = interface("MyInterface")
+            local InvalidInterface = {}
             assert.has_error(
                 function()
-                    implements(ParamClass, { ParamInterface })
+                    implements(InvalidInterface, { MyInterface })
                 end,
-                "ArgumentException(message=invalid implements parameters, inner_exception=ArgumentException(message=Error implementing interfaces 'ParamInterface' for 'ParamClass': Can't implement interface 'ParamInterface': Function 'func' is not implemented: Incorrect number of arguments. Expected 2 arguments,but 1 was provided.))"
+                "ArgumentException(message=parameter is not type, \"_name\" is nil, \"_attribute\" is nil, \"_interfaces\" is nil.)"
+            )
+        end)
+
+        it("should reject non-table _interfaces", function()
+            local MyInterface = interface("MyInterface")
+            local InvalidInterface = {
+                _name = "BadInterface",
+                _attribute = "interface",
+                _interfaces = "invalid"
+            }
+            assert.has_error(
+                function() implements(InvalidInterface, { MyInterface }) end,
+                "ArgumentException(message=parameter is not type, \"_interfaces\" type is not table.)"
             )
         end)
     end)
