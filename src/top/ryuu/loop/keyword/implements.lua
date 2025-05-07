@@ -5,23 +5,34 @@ local class_implements = require "top.ryuu.loop.internal.class.class_implements"
 local interface_implements = require "top.ryuu.loop.internal.interface.interface_implements"
 local ArgumentException = require "top.ryuu.loop.exception.ArgumentException"
 
--- TODO interfaces validation
----@param type Type class or interface
+---@param _type Type class or interface
 ---@param interfaces table<Type>
 ---@return nil
-local implements = function(type, interfaces)
-    local status, message = is_type(type)
-    if not status then
-        throw(ArgumentException:new(message))
+local implements = function(_type, interfaces)
+    local type_is_type, type_is_type_message = is_type(_type)
+    if not type_is_type then
+        throw(ArgumentException:new(type_is_type_message))
     end
 
-    if type._attribute == keyword.class then
-        class_implements(type, interfaces)
+    if type(interfaces) ~= "table" then
+        throw(ArgumentException:new("\"interfaces\" type is not table."))
+    elseif true then
+        for _, interface in ipairs(interfaces) do
+            local interface_is_type, interface_is_type_message = is_type(interface)
+            if not interface_is_type then
+                local internal_exception = ArgumentException:new(interface_is_type_message)
+                throw(ArgumentException:new("invalid interfaces element", internal_exception))
+            end
+        end
+    end
+
+    if _type._attribute == keyword.class then
+        class_implements(_type, interfaces)
         return
     end
 
-    if type._attribute == keyword.interface then
-        interface_implements(type, interfaces)
+    if _type._attribute == keyword.interface then
+        interface_implements(_type, interfaces)
         return
     end
 end

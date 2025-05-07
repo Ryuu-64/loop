@@ -17,10 +17,7 @@ return function(_type)
         table.insert(reasons, "\"_attribute\" is nil")
     end
 
-    if _type._interfaces == nil then
-        status = false
-        table.insert(reasons, "\"_interfaces\" is nil")
-    elseif type(_type._interfaces) ~= "table" then
+    if type(_type._interfaces) ~= "table" then
         status = false
         table.insert(reasons, "\"_interfaces\" type is not table")
     end

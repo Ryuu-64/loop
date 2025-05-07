@@ -127,20 +127,23 @@ describe("Implements test suite", function()
                 function()
                     implements(InvalidInterface, { MyInterface })
                 end,
-                "ArgumentException(message=parameter is not type, \"_name\" is nil, \"_attribute\" is nil, \"_interfaces\" is nil.)"
+                "ArgumentException(message=parameter is not type, \"_name\" is nil, \"_attribute\" is nil, \"_interfaces\" type is not table.)"
             )
         end)
 
-        it("should reject non-table _interfaces", function()
+        it("should throw error when non-table interfaces", function()
             local MyInterface = interface("MyInterface")
-            local InvalidInterface = {
-                _name = "BadInterface",
-                _attribute = "interface",
-                _interfaces = "invalid"
-            }
             assert.has_error(
-                function() implements(InvalidInterface, { MyInterface }) end,
-                "ArgumentException(message=parameter is not type, \"_interfaces\" type is not table.)"
+                function() implements(MyInterface, "foo") end,
+                "ArgumentException(message=\"interfaces\" type is not table.)"
+            )
+        end)
+
+        it("should throw error when interfaces element is not type", function()
+            local MyInterface = interface("MyInterface")
+            assert.has_error(
+                function() implements(MyInterface, { {} }) end,
+                "ArgumentException(message=invalid interfaces element, inner_exception=ArgumentException(message=parameter is not type, \"_name\" is nil, \"_attribute\" is nil, \"_interfaces\" type is not table.))"
             )
         end)
     end)
